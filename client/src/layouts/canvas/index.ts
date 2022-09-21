@@ -1,3 +1,4 @@
+import { RightPaneProperties } from "../right-pane";
 import { Polygon, Point } from "./utils";
 
 type Rect = {
@@ -24,17 +25,32 @@ let polygons: Polygon[] = [];
 function createCanvas() {
     canvas.width = canvasContainer.clientWidth;
     canvas.height = canvasContainer.clientHeight;
-    ctx.fillStyle = "red";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawGrid({ context: ctx, color: "black", stepx: 10, stepy: 10 });
     return ctx;
 }
 
+canvasContainer.addEventListener("propertiesChange", (e: Event) => {
+    console.log("In the canvas");
+    var eee = e as CustomEvent<{ rightPaneProperties: RightPaneProperties }>;
+    console.log(eee.detail.rightPaneProperties);
+    // resizeCanvas();
+});
+
+function setDrawingProperties(properties: RightPaneProperties) {
+    ctx.fillStyle = properties.fillStyle;
+    ctx.strokeStyle = properties.strokeStyle;
+    ctx.lineWidth = properties.lineWidth;
+}
+
 function resizeCanvas() {
-    canvas.width = 2000;
-    canvas.height = canvasContainer.clientHeight;
-    ctx.fillStyle = "red";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    clearCanvas();
+    // canvas.width = canvasContainer.clientWidth * 2;
+    // canvas.height = canvasContainer.clientHeight;
+    drawGrid({ context: ctx, color: "black", stepx: 10, stepy: 10 });
+}
+
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid({ context: ctx, color: "black", stepx: 10, stepy: 10 });
 }
 
@@ -93,7 +109,7 @@ function drawPolygon(polygon: Polygon) {
     polygon.createPath(ctx);
     polygon.stroke(ctx);
 
-    if (false) {
+    if (true) {
         polygon.fill(ctx);
     }
 }
@@ -264,4 +280,4 @@ editCheckbox.onchange = function (e) {
     }
 };
 
-export { createCanvas, resizeCanvas };
+export { createCanvas, resizeCanvas, setDrawingProperties };
