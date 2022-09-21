@@ -34,7 +34,45 @@
                         Browser does not support canvas
                     </canvas>
                 </div>
-                <div class="right-pane"></div>
+                <div class="right-pane">
+                    <button id="expand">Collapse</button>
+                    <div class="tab-buttons">
+                        <button id="properties" class="active">
+                            Properties
+                        </button>
+                        <button id="chat">Chat</button>
+                    </div>
+
+                    <div class="tab-area">
+                        <div class="tab-item properties active-tab">
+                            <div class="property line-width">
+                                <label>Line Width</label><br />
+                                <select id="lineWidthSelect">
+                                    <option value="1.0">1.0</option>
+                                    <option value="2.0">2.0</option>
+                                    <option value="3.0">3.0</option>
+                                    <option value="4.0">4.0</option>
+                                    <option value="5.0">5.0</option>
+                                    <option value="6.0">6.0</option>
+                                </select>
+                            </div>
+                            <div class="property stroke">
+                                <label>Stroke</label><br />
+                                <input id="stroke-color" type="color" />
+                            </div>
+                            <div class="property fill">
+                                <label>Fill</label><br />
+                                <input id="fill-color" type="color" />
+                            </div>
+
+                            <div id="dragDiv" class="property edit">
+                                <label>Edit</label>
+                                <input type="checkbox" id="editCheckbox" />
+                            </div>
+                        </div>
+                        <div class="tab-item chat"></div>
+                    </div>
+                </div>
             </main>
         </div>
         <script type="module" src="/src/main.ts"></script>
