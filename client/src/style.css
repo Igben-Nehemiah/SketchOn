@@ -38,8 +38,12 @@
 /* Main region */
 main {
     display: grid;
-    grid-template-columns: 5rem 1fr 5rem;
+    grid-template-columns: 5rem 1fr 15rem;
     height: 100vh;
+}
+
+main .full-canvas {
+    grid-template-columns: 5rem 1fr;
 }
 
 /* Left pane */
@@ -48,6 +52,7 @@ main {
     display: flex;
     flex-direction: column;
     border-radius: 0.3rem;
+    border-radius: 1rem;
     border: 0 2px transparent;
     box-shadow: 1px 4px 5px 2px lightgray;
 }
@@ -56,6 +61,7 @@ main {
     margin: 0.5rem auto;
     width: 3.5rem;
     height: 3.5rem;
+    border-radius: 1rem;
     background-color: transparent;
     border: 0px solid black;
     cursor: pointer;
@@ -73,8 +79,75 @@ main {
 /* Canvas */
 .canvas-container {
     margin-top: 0.3rem;
-    margin-left: 0.5rem;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    border-radius: 1rem;
+    overflow: hidden;
     height: 100%;
+    box-shadow: 1.5px 0px 3px 1px rgb(199, 190, 190);
     border: 1px solid lightgray;
+}
+
+.full-canvas {
+    width: 95%;
+}
+
+/* Right pane */
+.right-pane {
+    margin-top: 5px;
+    height: 100%;
+    padding: 0.5rem 10px;
+    /* border: 1px solid gray; */
+    box-shadow: 0 0 2px 1px lightgray;
+}
+
+.right-pane.expand {
+    display: none;
+    width: 0;
+}
+
+.right-pane .property {
+    margin: 10px 1px;
+    font-size: 0.8rem;
+}
+
+.right-pane select {
+    width: 100%;
+    padding: 5px;
+    outline: none;
+}
+
+.right-pane input[type="color"] {
+    width: 100%;
+}
+
+.right-pane .tabs {
+    margin: 2px 0px;
+}
+
+.tab-buttons button {
+    padding: 5px 10px;
+    border: 0 solid transparent;
+    border-radius: 0.2rem;
+    cursor: pointer;
+}
+
+.tab-buttons button.active {
+    background-color: var(--dark-color-a);
+    color: var(--light-color);
+}
+
+.tab-area {
+    border: 1px solid gray;
+    height: 100%;
+    padding: 5px;
+}
+
+.tab-item {
+    display: none;
+}
+
+.tab-item.active-tab {
+    display: block;
 }
