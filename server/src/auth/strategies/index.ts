@@ -1,2 +1,2 @@
 export * from './at.strategy';
-export * from './rt.stategy';
+export * from './rt.strategy';
