@@ -1,5 +1,8 @@
 .env
 
+# migrations
+migration.sql
+
 # compiled output
 /dist
 /node_modules
