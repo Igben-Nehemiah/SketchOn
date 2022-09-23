@@ -1,2 +1,2 @@
-export * from './at.gaurd';
+export * from './at.guard';
 export * from './rt.guard';
