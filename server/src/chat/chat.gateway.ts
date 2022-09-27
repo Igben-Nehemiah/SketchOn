@@ -20,6 +20,5 @@ export class ChatGateway implements OnGatewayInit {
   @SubscribeMessage(MESSAGE_TO_SERVER)
   handleMessage(client: Socket, payload: string) {
     client.broadcast.emit(MESSAGE_TO_CLIENT, payload);
-    // return { event: MESSAGE_TO_CLIENT, data: 'Hello world' };
   }
 }
