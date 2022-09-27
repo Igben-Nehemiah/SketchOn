@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { ChatGateway } from './chat/chat.gateway';
 import { AtGuard } from './common/guards';
 import { PrismaModule } from './prisma/prisma.module';
+import { DrawingGateway } from './drawing/drawing.gateway';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,6 +20,7 @@ import { PrismaModule } from './prisma/prisma.module';
       useClass: AtGuard,
     },
     ChatGateway,
+    DrawingGateway,
   ],
 })
 export class AppModule {}
