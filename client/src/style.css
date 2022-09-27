@@ -37,117 +37,143 @@
 
 /* Main region */
 main {
-    display: grid;
-    grid-template-columns: 5rem 1fr 15rem;
     height: 100vh;
 }
 
-main .full-canvas {
-    grid-template-columns: 5rem 1fr;
+body {
+    background: #dddddd;
 }
 
-/* Left pane */
-.left-pane {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.3rem;
-    border-radius: 1rem;
-    border: 0 2px transparent;
-    box-shadow: 1px 4px 5px 2px lightgray;
+option {
+    padding-right: 5px;
 }
 
-.left-pane button {
-    margin: 0.5rem auto;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 1rem;
-    background-color: transparent;
-    border: 0px solid black;
-    cursor: pointer;
-    background-color: var(--light-color);
-    box-shadow: 0 0 0px 0px lightgray;
-    box-shadow: 1px 1px 3px 1px rgb(101, 98, 98);
-    transition: all 0.1s;
-}
-
-.left-pane button:hover,
-.left-pane button.selected {
-    box-shadow: 3px 3px 2px 1px rgb(101, 98, 98);
-}
-
-/* Canvas */
-.canvas-container {
-    margin-top: 0.3rem;
-    margin-left: auto;
-    margin-right: auto;
-    width: 95%;
-    border-radius: 1rem;
-    overflow: hidden;
-    height: 100%;
-    box-shadow: 1.5px 0px 3px 1px rgb(199, 190, 190);
-    border: 1px solid lightgray;
-}
-
-.full-canvas {
-    width: 95%;
-}
-
-/* Right pane */
-.right-pane {
-    margin-top: 5px;
-    height: 100%;
-    padding: 0.5rem 10px;
-    /* border: 1px solid gray; */
-    box-shadow: 0 0 2px 1px lightgray;
-}
-
-.right-pane.expand {
-    display: none;
-    width: 0;
-}
-
-.right-pane .property {
-    margin: 10px 1px;
-    font-size: 0.8rem;
-}
-
-.right-pane select {
-    width: 100%;
-    padding: 5px;
-    outline: none;
-}
-
-.right-pane input[type="color"] {
-    width: 100%;
-}
-
-.right-pane .tabs {
-    margin: 2px 0px;
-}
-
-.tab-buttons button {
-    padding: 5px 10px;
-    border: 0 solid transparent;
-    border-radius: 0.2rem;
-    cursor: pointer;
-}
-
-.tab-buttons button.active {
-    background-color: var(--dark-color-a);
-    color: var(--light-color);
-}
-
-.tab-area {
-    border: 1px solid gray;
-    height: 100%;
-    padding: 5px;
-}
-
-.tab-item {
+.floatingControls {
+    position: absolute;
+    left: 105px;
+    top: 70px;
+    width: 300px;
+    padding: 20px;
+    border: thin solid rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 200, 0.1);
+    color: blue;
+    font: 14px Arial;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 6px 6px 8px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.2) 6px 6px 8px;
+    box-shadow: rgba(0, 0, 0, 0.2) 6px 6px 8px;
     display: none;
 }
 
-.tab-item.active-tab {
-    display: block;
+.floatingControls p {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+#iconCanvas {
+    background: #eeeeef;
+    border: thin solid #aaaaaa;
+    cursor: pointer;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+    box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+#drawingCanvas {
+    background: #ffffff;
+    border: thin solid #aaaaaa;
+    cursor: crosshair;
+    margin-left: 10px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+    box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+}
+
+#controls {
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 100px;
+}
+
+select {
+    margin-right: 15px;
+}
+
+@media all and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
+    #controls {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    #drawingCanvas {
+        background: #ffffff;
+        border: thin solid #aaaaaa;
+        cursor: crosshair;
+        margin-left: 10px;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 4px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 4px;
+        box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 4px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+    }
+}
+
+@media all and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: landscape) {
+    #controls {
+        padding-top: 20px;
+        padding-bottom: 10px;
+        padding-left: 85px;
+    }
+
+    #drawingCanvas {
+        background: #ffffff;
+        cursor: crosshair;
+        margin-left: 5px;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+        box-shadow: rgba(0, 0, 0, 0.5) 2px 2px 4px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+    }
+
+    #snapshotImageElement {
+        position: absolute;
+        left: 85px;
+        top: 30px;
+        margin: 20px;
+        display: none;
+    }
+}
+
+#snapshotButton {
+    margin-left: 150px;
+}
+
+#snapshotInstructions {
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    margin-top: 17px;
+    display: none;
+}
+
+#keyboard {
+    position: absolute;
+    left: 25px;
+    top: 0px;
+    width: 1000px;
+    height: 0px;
+
+    background: rgba(129, 129, 138, 0.4);
+
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 4px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 4px;
+    box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 4px;
 }
