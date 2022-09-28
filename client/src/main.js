@@ -673,40 +673,6 @@ function mouseDownOrTouchStartInControlCanvas(loc) {
     });
 }
 
-// Key event handlers............................................
-
-function backspace() {
-    restoreDrawingSurface();
-    currentText = currentText.slice(0, -1);
-    eraseTextCursor();
-}
-
-function enter() {
-    finishDrawingText();
-    mousedown.y += drawingContext.measureText("W").width;
-    saveDrawingSurface();
-    startDrawingText();
-}
-
-function insert(key) {
-    currentText += key;
-    restoreDrawingSurface();
-    drawCurrentText();
-    drawTextCursor();
-}
-
-document.onkeydown = function (e) {
-    if (e.keyCode === 8) {
-        // backspace
-        e.preventDefault();
-        backspace();
-    } else if (e.keyCode === 13) {
-        // enter
-        e.preventDefault();
-        enter();
-    }
-};
-
 function mouseDownOrTouchStartInDrawingCanvas(loc) {
     dragging = true;
 
@@ -920,6 +886,7 @@ drawingCanvas.onmouseup = function (e) {
 
     e.preventDefault();
     mouseUpOrTouchEndInDrawingCanvas(loc);
+    sendCanvasData();
 };
 
 // Control event handlers........................................
@@ -951,6 +918,7 @@ eraseAllButton.onclick = function (e) {
     drawGrid(drawingContext, GRID_LINE_COLOR, 10, 10);
     saveDrawingSurface();
     rubberbandW = rubberbandH = 0;
+    sendCanvasData();
 };
 
 curveInstructionsOkayButton.onclick = function (e) {
@@ -1025,13 +993,31 @@ document.body.addEventListener(
 drawIcons();
 drawBackground();
 
-/*
-if (window.matchMedia) alert('found'); else alert('nope');
-var mql = window.matchMedia("(orientation:landscape)");
-if (mql.addListener) alert('found'); else alert('nope');
+//Socket integration
 
-function listener(mql) { alert ('...'); }
+const drawingSocket = io("http://localhost:3000", {
+    path: "/drawing",
+});
 
-mql.addListener( listener ); 
-listener(mql);
-*/
+drawingSocket.on("messageToClient", (data) => {
+    //draw on canvas
+    drawFromData(data);
+});
+
+function drawFromData(data) {
+    var array = new Uint8ClampedArray(data);
+
+    var image = new ImageData(array, drawingCanvas.width, drawingCanvas.height);
+
+    drawingContext.putImageData(image, 0, 0);
+}
+
+function sendCanvasData() {
+    const value = drawingContext.getImageData(
+        0,
+        0,
+        drawingCanvas.width,
+        drawingCanvas.height
+    ).data.buffer;
+    drawingSocket.emit("messageToServer", value);
+}
